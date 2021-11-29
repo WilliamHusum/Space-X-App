@@ -20,20 +20,28 @@ class _LaunchDetailState extends State<LaunchDetail> {
       ),
       body: ListView(
         children: [
-          // Text(widget.pokemon.name),
-          FutureBuilder(builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              String imageURL = snapshot.data as String;
-              return Hero(
-                  child: Image.network(imageURL), tag: widget.launch.name);
-            } else {
-              return const CircularProgressIndicator();
-            }
-          }),
-          //FAB der gemmer det data vi har indtastet og går tilbage
-          FloatingActionButton(onPressed: () {
-            Navigator.pop(context, widget.launch);
-          })
+          // FutureBuilder(builder: (context, snapshot) {
+          Hero(
+            child: Image.network(widget.launch.imageUrl, scale: 2),
+            tag: widget.launch.name,
+          ),
+          Text(
+            widget.launch.name,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+          ),
+          Text(
+            widget.launch.date,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 10),
+          ),
+          Text(
+            widget.launch.details,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 10),
+          ),
+
+          // }
         ],
       ),
     );

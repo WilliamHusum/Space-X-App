@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spacex_app/rocket.dart';
+import 'package:spacex_app/rocket_detail.dart';
 
 import 'crew.dart';
+import 'crew_detail.dart';
 import 'launch.dart';
 import 'launch_controller.dart';
+import 'launch_detail.dart';
 
 void main() {
   runApp(
@@ -104,10 +107,10 @@ class TabBarDemo extends StatelessWidget {
         title: Text(launch.name),
         subtitle: Text(launchStatus + "\n " + launch.date),
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => LaunchDetail(launch: launch)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LaunchDetail(launch: launch)));
         });
   }
 
@@ -118,48 +121,32 @@ class TabBarDemo extends StatelessWidget {
         leading: FutureBuilder(
           // future: crewImageURL,
           builder: (context, AsyncSnapshot<String> snapshot) {
-            // if (snapshot.hasData) {
             return Hero(
                 tag: crew.name,
                 child: Image(image: NetworkImage(crew.crewImageUrl)));
-            // } else {
-            //   return const Icon(Icons.image);
-            // }
           },
         ),
         title: Text(crew.name),
-        subtitle: Text("Status: " + crew.status),
+        subtitle: Text("Status: " + crew.status + " \nAgency: " + crew.agency),
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => LaunchDetail(launch: crew)));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CrewDetail(crew: crew)));
         });
   }
 
 //Rockets
   rocketRow(BuildContext context, Rocket rocket) {
-    // final Future<String> launchImageURL = launch.fetchImageURL();
     return ListTile(
-        leading: FutureBuilder(
-          // future: crewImageURL,
-          builder: (context, AsyncSnapshot<String> snapshot) {
-            // if (snapshot.hasData) {
-            return Hero(
-                tag: rocket.name,
-                child: Image(image: NetworkImage(rocket.rocketImageUrl)));
-            // } else {
-            // return const Icon(Icons.image);
-            // }
-          },
-        ),
+        leading: Hero(
+            tag: rocket.name,
+            child: Image(image: NetworkImage(rocket.rocketImageUrl))),
         title: Text(rocket.name),
         subtitle: Text(rocket.country),
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => LaunchDetail(launch: crew)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RocketDetail(rocket: rocket)));
         });
   }
 }

@@ -19,12 +19,9 @@ class LaunchController extends ChangeNotifier {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonLaunchUrl);
     for (var i = 0; i < 4; i++) {
       //Efter de første 4 får jeg en null fejl, der skal nok være noget til at handle null exception
-      if (json[i]['flight_number'] != 6) {
-        print(json[i]['flight_number']);
 
-        var launch = json![i];
-        _launches.add(Launch.fromJson(launch));
-      }
+      var launch = json![i];
+      _launches.add(Launch.fromJson(launch));
     }
     notifyListeners();
   }
