@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:spacex_app/rocket.dart';
 
+import 'crew.dart';
 import 'launch.dart';
 import 'launch_controller.dart';
-import 'launch_detail.dart';
 
 void main() {
   runApp(
@@ -19,6 +20,9 @@ class TabBarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -34,18 +38,39 @@ class TabBarDemo extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
+              //Launches
               Consumer<LaunchController>(
-                  builder: (context, _pokemonController, widget) {
+                  builder: (context, _launchController, widget) {
                 return ListView.builder(
-                    itemCount: _pokemonController.numberOfLaunches,
+                    itemCount: _launchController.numberOfLaunches,
                     itemBuilder: (context, index) {
                       final Launch launch =
-                          _pokemonController.getLaunchOf(index: index);
-                      return pokemonRow(context, launch);
+                          _launchController.getLaunchOf(index: index);
+                      return launchRow(context, launch);
                     });
               }),
-              const Icon(Icons.directions_transit),
-              const Icon(Icons.directions_bike),
+              //Crew
+              Consumer<LaunchController>(
+                  builder: (context, _launchController, widget) {
+                return ListView.builder(
+                    itemCount: _launchController.numberOfCrew,
+                    itemBuilder: (context, index) {
+                      final Crew crew =
+                          _launchController.getCrewOf(index: index);
+                      return crewRow(context, crew);
+                    });
+              }),
+              //Rockets
+              Consumer<LaunchController>(
+                  builder: (context, _launchController, widget) {
+                return ListView.builder(
+                    itemCount: _launchController.numberOfRockets,
+                    itemBuilder: (context, index) {
+                      final Rocket rocket =
+                          _launchController.getRocketOf(index: index);
+                      return rocketRow(context, rocket);
+                    });
+              }),
             ],
           ),
         ),
@@ -53,30 +78,80 @@ class TabBarDemo extends StatelessWidget {
     );
   }
 
-  pokemonRow(BuildContext context, Launch launch) {
+//Launch
+  launchRow(BuildContext context, Launch launch) {
     final Future<String> launchImageURL = launch.fetchImageURL();
     return ListTile(
         leading: FutureBuilder(
           future: launchImageURL,
           builder: (context, AsyncSnapshot<String> snapshot) {
-            if (snapshot.hasData) {
-              return Hero(
-                  tag: launch.name,
-                  child: Image(image: NetworkImage(snapshot.data as String)));
-            } else {
-              return const Icon(Icons.image);
-            }
+            // if (snapshot.hasData) {
+            return Hero(
+                tag: launch.name,
+                child: Image(image: NetworkImage(launch.imageUrl)));
+            // } else {
+            //   return const Icon(Icons.image);
+            // }
           },
         ),
         title: Text(launch.name),
-        // trailing: pokemon.favorite
-        //     ? const Icon(Icons.favorite)
-        //     : const Icon(Icons.favorite_border),
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => LaunchDetail(launch: launch)));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => LaunchDetail(launch: launch)));
+        });
+  }
+
+//Crew
+  crewRow(BuildContext context, Crew crew) {
+    // final Future<String> launchImageURL = launch.fetchImageURL();
+    return ListTile(
+        leading: FutureBuilder(
+          // future: crewImageURL,
+          builder: (context, AsyncSnapshot<String> snapshot) {
+            // if (snapshot.hasData) {
+            return Hero(
+                tag: crew.name,
+                child: Image(image: NetworkImage(crew.crewImageUrl)));
+            // } else {
+            //   return const Icon(Icons.image);
+            // }
+          },
+        ),
+        title: Text(crew.name),
+        subtitle: Text("Status: " + crew.status),
+        onTap: () {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => LaunchDetail(launch: crew)));
+        });
+  }
+
+//Rockets
+  rocketRow(BuildContext context, Rocket rocket) {
+    // final Future<String> launchImageURL = launch.fetchImageURL();
+    return ListTile(
+        leading: FutureBuilder(
+          // future: crewImageURL,
+          builder: (context, AsyncSnapshot<String> snapshot) {
+            // if (snapshot.hasData) {
+            return Hero(
+                tag: rocket.name,
+                child: Image(image: NetworkImage(rocket.rocketImageUrl)));
+            // } else {
+            // return const Icon(Icons.image);
+            // }
+          },
+        ),
+        title: Text(rocket.name),
+        subtitle: Text(rocket.country),
+        onTap: () {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => LaunchDetail(launch: crew)));
         });
   }
 }
