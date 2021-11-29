@@ -17,11 +17,14 @@ class LaunchController extends ChangeNotifier {
 //Henter dataen async, kan ikke gøres direkte i controlleren, da resten af koden vil køre videre før data er modtaget
   _fetchJSONLaunches() async {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonLaunchUrl);
-    for (var i = 0; i < 5; i++) {
-      //Jeg kan ikke få den til at virke med [i], Unhandled Exception: type 'List<dynamic>' is not a subtype of type 'num'
+    for (var i = 0; i < 4; i++) {
+      //Efter de første 4 får jeg en null fejl, der skal nok være noget til at handle null exception
+      if (json[i]['flight_number'] != 6) {
+        print(json[i]['flight_number']);
 
-      var launch = json![0];
-      _launches.add(Launch.fromJson(launch));
+        var launch = json![i];
+        _launches.add(Launch.fromJson(launch));
+      }
     }
     notifyListeners();
   }

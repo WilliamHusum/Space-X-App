@@ -79,8 +79,15 @@ class TabBarDemo extends StatelessWidget {
   }
 
 //Launch
+
   launchRow(BuildContext context, Launch launch) {
     final Future<String> launchImageURL = launch.fetchImageURL();
+    String launchStatus;
+    if (launch.status.toString() == "false") {
+      launchStatus = "Failed";
+    } else {
+      launchStatus = "Succeeded";
+    }
     return ListTile(
         leading: FutureBuilder(
           future: launchImageURL,
@@ -95,6 +102,7 @@ class TabBarDemo extends StatelessWidget {
           },
         ),
         title: Text(launch.name),
+        subtitle: Text(launchStatus + "\n " + launch.date),
         onTap: () {
           // Navigator.push(
           //     context,
