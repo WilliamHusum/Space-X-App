@@ -12,9 +12,8 @@ class LaunchController extends ChangeNotifier {
 //Henter dataen async, kan ikke gøres direkte i controlleren, da resten af koden vil køre videre før data er modtaget
   _fetchJSON() async {
     dynamic json = await _networkService.fetchJSONFrom(url: JSON_launch_url);
-    List<dynamic> jsonLaunches = json['results'];
-    for (var i = 0; i < jsonLaunches.length; i++) {
-      var launch = jsonLaunches[i];
+    for (var i = 0; i < 5; i++) {
+      var launch = json![0];
       _launches.add(Launch.fromJson(launch));
     }
     notifyListeners();
