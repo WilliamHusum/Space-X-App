@@ -18,6 +18,8 @@ class LaunchController extends ChangeNotifier {
   _fetchJSONLaunches() async {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonLaunchUrl);
     for (var i = 0; i < 5; i++) {
+      //Jeg kan ikke få den til at virke med [i], Unhandled Exception: type 'List<dynamic>' is not a subtype of type 'num'
+
       var launch = json![0];
       _launches.add(Launch.fromJson(launch));
     }
@@ -25,9 +27,9 @@ class LaunchController extends ChangeNotifier {
   }
 
   _fetchJSONCrew() async {
-    dynamic json = await _networkService.fetchJSONFrom(url: jsonCrewUrl);
-    for (var i = 0; i < 5; i++) {
-      var crew = json![0];
+    dynamic crewJson = await _networkService.fetchJSONFrom(url: jsonCrewUrl);
+    for (var i = 0; i < crewJson.length; i++) {
+      var crew = crewJson![i];
       _crew.add(Crew.fromJson(crew));
     }
     notifyListeners();
@@ -35,8 +37,8 @@ class LaunchController extends ChangeNotifier {
 
   _fetchJSONRockets() async {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonRocketsUrl);
-    for (var i = 0; i < 5; i++) {
-      var rocket = json![0];
+    for (var i = 0; i < json.length; i++) {
+      var rocket = json![i];
       _rockets.add(Rocket.fromJson(rocket));
     }
     notifyListeners();
