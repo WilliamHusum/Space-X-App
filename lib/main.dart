@@ -84,25 +84,19 @@ class TabBarDemo extends StatelessWidget {
 //Launch
 
   launchRow(BuildContext context, Launch launch) {
-    final Future<String> launchImageURL = launch.fetchImageURL();
     String launchStatus;
-    if (launch.status.toString() == "false") {
+    if (launch.status == false || launch.status == null) {
       launchStatus = "Failed";
     } else {
       launchStatus = "Succeeded";
     }
     return ListTile(
-        leading: FutureBuilder(
-          future: launchImageURL,
-          builder: (context, AsyncSnapshot<String> snapshot) {
-            // if (snapshot.hasData) {
-            return Hero(
-                tag: launch.name,
-                child: Image(image: NetworkImage(launch.imageUrl)));
-            // } else {
-            //   return const Icon(Icons.image);
-            // }
-          },
+        leading: Hero(
+          tag: launch.name,
+          child: Image(
+            image: NetworkImage(launch.imageUrl ??
+                "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/rocket-512.png"),
+          ),
         ),
         title: Text(launch.name),
         subtitle: Text(launchStatus + "\n " + launch.date),
@@ -116,7 +110,6 @@ class TabBarDemo extends StatelessWidget {
 
 //Crew
   crewRow(BuildContext context, Crew crew) {
-    // final Future<String> launchImageURL = launch.fetchImageURL();
     return ListTile(
         leading: FutureBuilder(
           // future: crewImageURL,

@@ -22,7 +22,10 @@ class _LaunchDetailState extends State<LaunchDetail> {
         children: [
           // FutureBuilder(builder: (context, snapshot) {
           Hero(
-            child: Image.network(widget.launch.imageUrl, scale: 2),
+            child: Image.network(
+                widget.launch.imageUrl ??
+                    "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/rocket-512.png",
+                scale: 2),
             tag: widget.launch.name,
           ),
           Text(
@@ -36,7 +39,7 @@ class _LaunchDetailState extends State<LaunchDetail> {
             style: const TextStyle(fontSize: 10),
           ),
           Text(
-            widget.launch.details,
+            widget.launch.details ?? "No details",
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 10),
           ),

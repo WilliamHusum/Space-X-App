@@ -29,9 +29,9 @@ class _RocketDetailState extends State<RocketDetail> {
             child: Image.network(widget.rocket.rocketImageUrl, scale: 2),
             tag: widget.rocket.name,
           ),
-          // Text(
-          //   "Description: " + widget.rocket.description,
-          // )
+          Text(
+            "Description: " + widget.rocket.description,
+          )
         ],
       ),
     );

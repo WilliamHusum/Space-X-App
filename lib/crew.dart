@@ -25,14 +25,4 @@ class Crew {
       // date: json['date_utc'],
     );
   }
-
-  Future<String> fetchImageURL() async {
-    final response = await http.get(Uri.parse(crewImageUrl));
-    if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      return jsonData['sprites']['other']['official-artwork']['front_default'];
-    } else {
-      return '';
-    }
-  }
 }

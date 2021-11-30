@@ -1,11 +1,8 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 class Launch {
   final String name;
-  final String imageUrl;
-  final bool status;
-  final String details;
+  final String? imageUrl;
+  final bool? status;
+  final String? details;
   final String date;
 
   Launch({
@@ -17,22 +14,23 @@ class Launch {
   });
 
   factory Launch.fromJson(Map<String, dynamic> json) {
+    // var tempDetails = json['details'];
+    // tempDetails ??= "No details";
+    var tempStatus = json['status'];
+    tempStatus ??= "No status";
+
+    // print("name: " + json['name']);
+    /*print("img url: " + json['links']['patch']['small']);
+    print("succes: " + json['success'].toString());
+    print("date: " + json['date_utc']);*/
+    // print("-----------------------------------");
+
     return Launch(
       name: json['name'],
       imageUrl: json['links']['patch']['small'],
       status: json['success'],
-      details: json['details'],
-      date: json['date_utc'].toString(),
+      details: "tempDetails",
+      date: json['date_utc'],
     );
-  }
-
-  Future<String> fetchImageURL() async {
-    final response = await http.get(Uri.parse(imageUrl));
-    if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      return jsonData['sprites']['other']['official-artwork']['front_default'];
-    } else {
-      return '';
-    }
   }
 }

@@ -17,9 +17,7 @@ class LaunchController extends ChangeNotifier {
 //Henter dataen async, kan ikke gøres direkte i controlleren, da resten af koden vil køre videre før data er modtaget
   _fetchJSONLaunches() async {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonLaunchUrl);
-    for (var i = 0; i < 4; i++) {
-      //Efter de første 4 får jeg en null fejl, der skal nok være noget til at handle null exception
-
+    for (var i = 0; i < json.length; i++) {
       var launch = json![i];
       _launches.add(Launch.fromJson(launch));
     }
@@ -36,9 +34,10 @@ class LaunchController extends ChangeNotifier {
   }
 
   _fetchJSONRockets() async {
-    dynamic json = await _networkService.fetchJSONFrom(url: jsonRocketsUrl);
-    for (var i = 0; i < json.length; i++) {
-      var rocket = json![i];
+    dynamic rocketJson =
+        await _networkService.fetchJSONFrom(url: jsonRocketsUrl);
+    for (var i = 0; i < rocketJson.length; i++) {
+      var rocket = rocketJson![i];
       _rockets.add(Rocket.fromJson(rocket));
     }
     notifyListeners();
