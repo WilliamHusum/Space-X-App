@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:spacex_app/rocket.dart';
 import 'package:spacex_app/rocket_detail.dart';
@@ -101,7 +102,10 @@ class TabBarDemo extends StatelessWidget {
           ),
         ),
         title: Text(launch.name),
-        subtitle: Text(launchStatus + "\n " + launch.date),
+        //DateFormat formaterer DateTime til det ønskede format
+        subtitle: Text(launchStatus +
+            "\n " +
+            DateFormat('dd-MM-yyyy - kk:mm').format(launch.date)),
         onTap: () {
           Navigator.push(
               context,

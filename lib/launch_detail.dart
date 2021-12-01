@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spacex_app/launch.dart';
 import 'package:spacex_app/launch_controller.dart';
 import 'package:spacex_app/rocket.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class LaunchDetail extends StatefulWidget {
@@ -41,7 +42,8 @@ class _LaunchDetailState extends State<LaunchDetail> {
           ),
           const Divider(color: Colors.black),
           Text(
-            widget.launch.date,
+            DateFormat('dd-MM-yyyy - kk:mm').format(widget.launch.date),
+            // widget.launch.date.toLocal().toIso8601String(),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 10, color: Colors.grey),
           ),
@@ -56,7 +58,7 @@ class _LaunchDetailState extends State<LaunchDetail> {
           ),
           const Divider(color: Colors.black),
 
-          Text(widget.launch.rocket!.name ?? "No rocket"),
+          // Text(widget.launch.rocket!.name ?? "No rocket"),
 
           // }
         ],
