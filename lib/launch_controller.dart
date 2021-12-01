@@ -66,6 +66,15 @@ class LaunchController extends ChangeNotifier {
     return _launches;
   }
 
+  Rocket? getRocketOfLaunch(String rocketID) {
+    for (var rocket in _rockets) {
+      if (rocketID == rocket.id) {
+        return rocket;
+      }
+      return null;
+    }
+  }
+
   //Crew
 
   crewHasChanged() {

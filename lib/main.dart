@@ -85,8 +85,10 @@ class TabBarDemo extends StatelessWidget {
 
   launchRow(BuildContext context, Launch launch) {
     String launchStatus;
-    if (launch.status == false || launch.status == null) {
+    if (launch.status == false) {
       launchStatus = "Failed";
+    } else if (launch.status == null) {
+      launchStatus = "No data";
     } else {
       launchStatus = "Succeeded";
     }
@@ -131,9 +133,9 @@ class TabBarDemo extends StatelessWidget {
   rocketRow(BuildContext context, Rocket rocket) {
     return ListTile(
         leading: Hero(
-            tag: rocket.name,
-            child: Image(image: NetworkImage(rocket.rocketImageUrl))),
-        title: Text(rocket.name),
+            tag: rocket.name ?? "No rocket",
+            child: Image(image: NetworkImage(rocket.rocketImageUrl1))),
+        title: Text(rocket.name ?? "No rocket"),
         subtitle: Text(rocket.country),
         onTap: () {
           Navigator.push(
