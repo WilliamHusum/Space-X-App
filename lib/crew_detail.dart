@@ -29,7 +29,8 @@ class _CrewDetailState extends State<CrewDetail> {
             child: Column(
               children: <Widget>[
                 Hero(
-                  child: Image.network(widget.crew.crewImageUrl, scale: 2),
+                  child: Image.network(widget.crew.crewImageUrl,
+                      scale: 2, height: 350),
                   tag: widget.crew.name,
                 ),
                 Text(
