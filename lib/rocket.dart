@@ -9,7 +9,6 @@ class Rocket {
   final String? engines;
   final String? fuelAmount;
   final String id;
-  
 
   Rocket({
     required this.name,

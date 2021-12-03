@@ -1,7 +1,3 @@
-import 'package:spacex_app/rocket.dart';
-
-import 'launch_controller.dart';
-
 class Launch {
   final String name;
   final String? imageUrl;
@@ -22,13 +18,6 @@ class Launch {
   });
 
   factory Launch.fromJson(Map<String, dynamic> json) {
-    LaunchController? launchController;
-    var rcktID = json['rocket'];
-    // print(rcktID);
-    // Rocket? rocket2 = launchController!.getRocketOfLaunch(rcktID);
-    // if (rocket2 == null) {
-    //   throw Exception("No rocket");
-    // }
     return Launch(
       name: json['name'],
       imageUrl: json['links']['patch']['small'],

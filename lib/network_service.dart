@@ -9,6 +9,4 @@ class NetworkService {
       return json.decode(response.body);
     }
   }
-
-  fetchImageURLFrom({required String url}) async {}
 }

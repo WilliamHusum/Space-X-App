@@ -14,7 +14,6 @@ class LaunchController extends ChangeNotifier {
   static const String jsonCrewUrl = 'https://api.spacexdata.com/v4/crew';
   static const String jsonRocketsUrl = 'https://api.spacexdata.com/v4/rockets';
 
-//Henter dataen async, kan ikke gøres direkte i controlleren, da resten af koden vil køre videre før data er modtaget
   _fetchJSONLaunches() async {
     dynamic json = await _networkService.fetchJSONFrom(url: jsonLaunchUrl);
     for (var i = 0; i < json.length; i++) {
@@ -49,7 +48,7 @@ class LaunchController extends ChangeNotifier {
     _fetchJSONRockets();
   }
 
-//Launches
+//Launches ----------------------------------------------------------------
   launchHasChanged() {
     notifyListeners();
   }
@@ -75,7 +74,7 @@ class LaunchController extends ChangeNotifier {
     }
   }
 
-  //Crew
+  //Crew-------------------------------------------------------------
 
   crewHasChanged() {
     notifyListeners();
@@ -93,7 +92,7 @@ class LaunchController extends ChangeNotifier {
     return _crew;
   }
 
-  //rockets
+  //rockets ----------------------------------------------------------------
   rocketsHasChanged() {
     notifyListeners();
   }
@@ -110,6 +109,7 @@ class LaunchController extends ChangeNotifier {
     return _rockets;
   }
 
+//Find the launch that crew what on
   Launch? getLaunchOfCrew(String launchID) {
     for (var launch in _launches) {
       if (launchID == launch.launchID) {
@@ -118,11 +118,3 @@ class LaunchController extends ChangeNotifier {
     }
   }
 }
-
-  // Rocket? getRocketOfLaunch(String rocketID) {
-  //   for (var rocket in _rockets) {
-  //     if (rocketID == rocket.id) {
-  //       return rocket;
-  //     }
-  //   }
-  // }

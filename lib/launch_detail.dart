@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_app/launch.dart';
-import 'package:spacex_app/launch_controller.dart';
 import 'package:spacex_app/rocket.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class LaunchDetail extends StatefulWidget {
   Launch launch;
-  // LaunchController launchController;
   Rocket rocket;
 
   LaunchDetail({Key? key, required this.launch, required this.rocket})
@@ -35,7 +33,6 @@ class _LaunchDetailState extends State<LaunchDetail> {
                 scale: 2),
             tag: widget.launch.name,
           ),
-          //Overskrift med Launch name
           Text(
             widget.launch.name,
             textAlign: TextAlign.center,
@@ -108,16 +105,6 @@ class _LaunchDetailState extends State<LaunchDetail> {
                 scale: 2),
             tag: widget.rocket.rocketImageUrl2 ?? "No rocket",
           ),
-          // Hero(
-          //   child: Image.network(
-          //       widget.rocket.rocketImageUrl2 ??
-          //           "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/rocket-512.png",
-          //       height: 200,
-          //       scale: 2),
-          //   tag: widget.rocket.rocketImageUrl2 ?? "",
-          // ),
-
-          // }
         ],
       ),
     );

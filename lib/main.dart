@@ -87,7 +87,6 @@ class TabBarDemo extends StatelessWidget {
   }
 
 //Launch
-
   launchRow(BuildContext context, Launch launch, Rocket rocket) {
     String launchStatus;
     if (launch.status == false) {
@@ -123,7 +122,6 @@ class TabBarDemo extends StatelessWidget {
   crewRow(BuildContext context, Crew crew, Launch launch) {
     return ListTile(
         leading: FutureBuilder(
-          // future: crewImageURL,
           builder: (context, AsyncSnapshot<String> snapshot) {
             return Hero(
                 tag: crew.name,

@@ -47,7 +47,6 @@ class _CrewDetailState extends State<CrewDetail> {
           Text("Launch: ${widget.launch.name}",
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12)),
-
           Text(
             DateFormat('dd-MM-yyyy - kk:mm').format(widget.launch.date),
             textAlign: TextAlign.center,

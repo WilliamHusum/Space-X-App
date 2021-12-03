@@ -1,6 +1,3 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 class Crew {
   final String name;
   final String crewImageUrl;
