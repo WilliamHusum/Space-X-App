@@ -124,6 +124,9 @@ class _LaunchDetailState extends State<LaunchDetail> {
                       height: 200, scale: 2),
                   tag: widget.rocket.name ?? "No rocket",
                 ),
+                const Divider(
+                  color: Colors.white,
+                ),
                 Hero(
                   child: Image.network(
                       widget.rocket.rocketImageUrl2 ??
