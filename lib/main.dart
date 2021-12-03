@@ -125,9 +125,9 @@ class TabBarDemo extends StatelessWidget {
   crewRow(BuildContext context, Crew crew, Launch launch) {
     return ListTile(
         leading: Hero(
-          tag: crew.name,
-          child: Image(image: NetworkImage(crew.crewImageUrl), width: 60),
-        ),
+            tag: crew.name,
+            child: CircleAvatar(
+                radius: 30, backgroundImage: NetworkImage(crew.crewImageUrl))),
         title: Text(crew.name),
         subtitle: Text("Status: " + crew.status + " \nAgency: " + crew.agency),
         trailing: const Icon(Icons.navigate_next),
