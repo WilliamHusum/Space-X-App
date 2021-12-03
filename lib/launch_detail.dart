@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:spacex_app/launch.dart';
 import 'package:spacex_app/rocket.dart';
 import 'package:intl/intl.dart';
@@ -54,6 +55,11 @@ class _LaunchDetailState extends State<LaunchDetail> {
           ),
           const Divider(color: Colors.black),
 
+          Container(
+              child:
+                  const Icon(MdiIcons.rocket, size: 50, color: Colors.blueGrey),
+              alignment: Alignment.center),
+
           const Text("Rocket details: ",
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
@@ -87,6 +93,7 @@ class _LaunchDetailState extends State<LaunchDetail> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 12),
           ),
+
           const Divider(color: Colors.black),
 
           const Text("Rocket images: ",

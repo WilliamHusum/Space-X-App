@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:spacex_app/rocket.dart';
 import 'package:spacex_app/rocket_detail.dart';
@@ -33,9 +34,9 @@ class TabBarDemo extends StatelessWidget {
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.flag), text: "Launches"),
-                Tab(icon: Icon(Icons.person), text: "Crew"),
-                Tab(icon: Icon(Icons.flight_takeoff), text: "Rockets"),
+                Tab(icon: Icon(MdiIcons.rocketLaunch), text: "Launches"),
+                Tab(icon: Icon(MdiIcons.accountGroup), text: "Crew"),
+                Tab(icon: Icon(MdiIcons.rocket), text: "Rockets"),
               ],
             ),
             title: const Text('Space X'),
@@ -52,7 +53,8 @@ class TabBarDemo extends StatelessWidget {
                           _launchController.getLaunchOf(index: index);
                       final Rocket? rocket = _launchController
                           .getRocketOfLaunch(launch.rocketID ?? "");
-                      return launchRow(context, launch, rocket!);
+                      return Card(child: launchRow(context, launch, rocket!));
+                      // return ;
                     });
               }),
               //Crew
@@ -65,7 +67,7 @@ class TabBarDemo extends StatelessWidget {
                           _launchController.getCrewOf(index: index);
                       final Launch? launch =
                           _launchController.getLaunchOfCrew(crew.launchID);
-                      return crewRow(context, crew, launch!);
+                      return Card(child: crewRow(context, crew, launch!));
                     });
               }),
               //Rockets
@@ -76,7 +78,7 @@ class TabBarDemo extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final Rocket rocket =
                           _launchController.getRocketOf(index: index);
-                      return rocketRow(context, rocket);
+                      return Card(child: rocketRow(context, rocket));
                     });
               }),
             ],
@@ -109,6 +111,7 @@ class TabBarDemo extends StatelessWidget {
         subtitle: Text(launchStatus +
             "\n " +
             DateFormat('dd-MM-yyyy - kk:mm').format(launch.date)),
+        trailing: const Icon(Icons.navigate_next),
         onTap: () {
           Navigator.push(
               context,
@@ -121,15 +124,13 @@ class TabBarDemo extends StatelessWidget {
 //Crew
   crewRow(BuildContext context, Crew crew, Launch launch) {
     return ListTile(
-        leading: FutureBuilder(
-          builder: (context, AsyncSnapshot<String> snapshot) {
-            return Hero(
-                tag: crew.name,
-                child: Image(image: NetworkImage(crew.crewImageUrl)));
-          },
+        leading: Hero(
+          tag: crew.name,
+          child: Image(image: NetworkImage(crew.crewImageUrl), width: 60),
         ),
         title: Text(crew.name),
         subtitle: Text("Status: " + crew.status + " \nAgency: " + crew.agency),
+        trailing: const Icon(Icons.navigate_next),
         onTap: () {
           Navigator.push(
               context,
@@ -147,6 +148,7 @@ class TabBarDemo extends StatelessWidget {
             child: Image(image: NetworkImage(rocket.rocketImageUrl1))),
         title: Text(rocket.name ?? "No rocket"),
         subtitle: Text(rocket.country),
+        trailing: const Icon(Icons.navigate_next),
         onTap: () {
           Navigator.push(
               context,
