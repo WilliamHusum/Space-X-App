@@ -8,9 +8,10 @@ import 'package:intl/intl.dart';
 class LaunchDetail extends StatefulWidget {
   Launch launch;
   // LaunchController launchController;
-  // Rocket rocket;
+  Rocket rocket;
 
-  LaunchDetail({Key? key, required this.launch}) : super(key: key);
+  LaunchDetail({Key? key, required this.launch, required this.rocket})
+      : super(key: key);
 
   @override
   State<LaunchDetail> createState() => _LaunchDetailState();
@@ -21,7 +22,7 @@ class _LaunchDetailState extends State<LaunchDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.launch.name),
+        title: const Text("Launch details"),
       ),
       body: ListView(
         children: [
@@ -40,12 +41,10 @@ class _LaunchDetailState extends State<LaunchDetail> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
           ),
-          const Divider(color: Colors.black),
           Text(
             DateFormat('dd-MM-yyyy - kk:mm').format(widget.launch.date),
-            // widget.launch.date.toLocal().toIso8601String(),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 10, color: Colors.grey),
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
           const Divider(color: Colors.black),
           const Text("Launch details: ",
@@ -58,7 +57,65 @@ class _LaunchDetailState extends State<LaunchDetail> {
           ),
           const Divider(color: Colors.black),
 
-          // Text(widget.launch.rocket!.name ?? "No rocket"),
+          const Text("Rocket details: ",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          Text(
+            "Name: ${widget.rocket.name ?? "No rocket"}",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            "Country: ${widget.rocket.country}",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            "Weight: " + widget.rocket.mass + " kg.",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            "Price: \$" + widget.rocket.costPerLaunch,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            "Number of engines: ${widget.rocket.engines ?? "Info not available"}",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          Text(
+            "Fuel amount: ${widget.rocket.fuelAmount ?? "Info not available"} tons",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
+          const Divider(color: Colors.black),
+
+          const Text("Rocket images: ",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          Hero(
+            child: Image.network(widget.rocket.rocketImageUrl1,
+                height: 200, scale: 2),
+            tag: widget.rocket.name ?? "No rocket",
+          ),
+          Hero(
+            child: Image.network(
+                widget.rocket.rocketImageUrl2 ??
+                    "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/rocket-512.png",
+                height: 200,
+                scale: 2),
+            tag: widget.rocket.rocketImageUrl2 ?? "No rocket",
+          ),
+          // Hero(
+          //   child: Image.network(
+          //       widget.rocket.rocketImageUrl2 ??
+          //           "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/rocket-512.png",
+          //       height: 200,
+          //       scale: 2),
+          //   tag: widget.rocket.rocketImageUrl2 ?? "",
+          // ),
 
           // }
         ],

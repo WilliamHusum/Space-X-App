@@ -6,14 +6,14 @@ class Crew {
   final String crewImageUrl;
   final String agency;
   final String status;
-  // final DateTime date;
+  final String launchID;
 
   Crew({
     required this.name,
     required this.crewImageUrl,
     required this.agency,
     required this.status,
-    // required this.date,
+    required this.launchID,
   });
 
   factory Crew.fromJson(Map<String, dynamic> json) {
@@ -22,7 +22,7 @@ class Crew {
       crewImageUrl: json['image'],
       agency: json['agency'],
       status: json['status'],
-      // date: json['date_utc'],
+      launchID: json['launches'][0],
     );
   }
 }

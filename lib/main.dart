@@ -50,7 +50,9 @@ class TabBarDemo extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final Launch launch =
                           _launchController.getLaunchOf(index: index);
-                      return launchRow(context, launch);
+                      final Rocket? rocket = _launchController
+                          .getRocketOfLaunch(launch.rocketID ?? "");
+                      return launchRow(context, launch, rocket!);
                     });
               }),
               //Crew
@@ -61,7 +63,9 @@ class TabBarDemo extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final Crew crew =
                           _launchController.getCrewOf(index: index);
-                      return crewRow(context, crew);
+                      final Launch? launch =
+                          _launchController.getLaunchOfCrew(crew.launchID);
+                      return crewRow(context, crew, launch!);
                     });
               }),
               //Rockets
@@ -84,7 +88,7 @@ class TabBarDemo extends StatelessWidget {
 
 //Launch
 
-  launchRow(BuildContext context, Launch launch) {
+  launchRow(BuildContext context, Launch launch, Rocket rocket) {
     String launchStatus;
     if (launch.status == false) {
       launchStatus = "Failed";
@@ -110,12 +114,13 @@ class TabBarDemo extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => LaunchDetail(launch: launch)));
+                  builder: (context) =>
+                      LaunchDetail(launch: launch, rocket: rocket)));
         });
   }
 
 //Crew
-  crewRow(BuildContext context, Crew crew) {
+  crewRow(BuildContext context, Crew crew, Launch launch) {
     return ListTile(
         leading: FutureBuilder(
           // future: crewImageURL,
@@ -128,8 +133,11 @@ class TabBarDemo extends StatelessWidget {
         title: Text(crew.name),
         subtitle: Text("Status: " + crew.status + " \nAgency: " + crew.agency),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CrewDetail(crew: crew)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      CrewDetail(crew: crew, launch: launch)));
         });
   }
 

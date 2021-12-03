@@ -1,3 +1,7 @@
+import 'package:spacex_app/rocket.dart';
+
+import 'launch_controller.dart';
+
 class Launch {
   final String name;
   final String? imageUrl;
@@ -5,7 +9,7 @@ class Launch {
   final String? details;
   final DateTime date;
   final String? rocketID;
-  // final Rocket? rocket;
+  final String launchID;
 
   Launch({
     required this.name,
@@ -14,12 +18,13 @@ class Launch {
     required this.details,
     required this.date,
     required this.rocketID,
-    // required this.rocket,
+    required this.launchID,
   });
 
   factory Launch.fromJson(Map<String, dynamic> json) {
-    // LaunchController? launchController;
-    // var rcktID = json['rocket'];
+    LaunchController? launchController;
+    var rcktID = json['rocket'];
+    // print(rcktID);
     // Rocket? rocket2 = launchController!.getRocketOfLaunch(rcktID);
     // if (rocket2 == null) {
     //   throw Exception("No rocket");
@@ -31,7 +36,7 @@ class Launch {
       details: json['details'],
       date: DateTime.fromMillisecondsSinceEpoch(json['date_unix'] * 1000),
       rocketID: json['rocket'],
-      // rocket: rocket2,
+      launchID: json['id'],
     );
   }
 }

@@ -66,12 +66,12 @@ class LaunchController extends ChangeNotifier {
     return _launches;
   }
 
+//Find rocket which matches the rocketID from the launch
   Rocket? getRocketOfLaunch(String rocketID) {
     for (var rocket in _rockets) {
       if (rocketID == rocket.id) {
         return rocket;
       }
-      return null;
     }
   }
 
@@ -109,4 +109,20 @@ class LaunchController extends ChangeNotifier {
   List<Rocket> get rockets {
     return _rockets;
   }
+
+  Launch? getLaunchOfCrew(String launchID) {
+    for (var launch in _launches) {
+      if (launchID == launch.launchID) {
+        return launch;
+      }
+    }
+  }
 }
+
+  // Rocket? getRocketOfLaunch(String rocketID) {
+  //   for (var rocket in _rockets) {
+  //     if (rocketID == rocket.id) {
+  //       return rocket;
+  //     }
+  //   }
+  // }
